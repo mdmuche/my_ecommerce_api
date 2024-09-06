@@ -12,10 +12,10 @@ This is a project to authenticate two kinds of users **admin** and **customer** 
 ## Installation
 
 - Clone repository
-  `git clone https://github.com/mdmuche/kodecamp4_stage6.git`
+  `git clone https://github.com/mdmuche/my_ecommerce_api`
 
 - Change directory
-  `cd kodecamp4_stage6`
+  `cd my_ecommerce_api`
 
 - Install dependency
   `npm install`
@@ -255,10 +255,7 @@ Authorization: Bearer your_jwt_token
 ### Run test suites for admin and customer endponits
 
 Admin Tests
-`npm run adminTest`
-
-Customer Test
-`npm run customerTest`
+`npm test`
 
 ```
 
