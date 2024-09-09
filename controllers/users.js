@@ -182,8 +182,6 @@ const forgotPassword = async (req, res, next) => {
 
     const user = await userCollection.findOne({ email });
 
-    console.log("user is", user);
-
     if (!user) {
       res.status(404).send({
         message: "user not found",

@@ -24,8 +24,6 @@ const verifyAuth = (req, res, next) => {
 
   req.userDetails = userDetails;
 
-  console.log("user role is", userDetails.role);
-
   if (userDetails) {
     next();
   } else {

@@ -11,9 +11,7 @@ const logUserActivity = require("../utils/activityLogging");
 const getAllProducts = async (req, res, next) => {
   const { page, limit } = req.params;
 
-  const products = await prodCollection
-    // .find({}, "-createdAt, -updatedAt")
-    .paginate({}, { page, limit });
+  const products = await prodCollection.paginate({}, { page, limit });
 
   if (products.docs == 0) {
     res.status(404).send({ message: "no products found" });
