@@ -2,6 +2,7 @@ const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const { v4 } = require("uuid");
 const { sendEmail } = require("../utils/emailUtils");
+const validator = require("validator");
 
 const userCollection = require("../models/user");
 const tokenCollection = require("../models/token");
@@ -12,11 +13,28 @@ const userRegister = async function (req, res, next) {
   try {
     const { fullName, email, password } = req.body;
 
-    console.log(req.body);
-
     if (!fullName || !email || !password) {
       res.status(400).send({ message: "input field required" });
       return;
+    }
+
+    if (!validator.isEmail(email)) {
+      return res.status(400).send({ message: "Invalid email address" });
+    }
+
+    if (
+      !validator.isStrongPassword(password, {
+        minLength: 8,
+        minLowercase: 1,
+        minUppercase: 1,
+        minNumbers: 1,
+        minSymbols: 1,
+      })
+    ) {
+      return res.status(400).send({
+        message:
+          "Password must be at least 8 characters long and include at least one lowercase letter, one uppercase letter, one number, and one symbol.",
+      });
     }
 
     const userEmail = await userCollection.exists({ email });
@@ -130,7 +148,10 @@ const loginUser = async (req, res, next) => {
         email: userDetails.email,
         role: userDetails.role,
       },
-      process.env.SECRET
+      process.env.SECRET,
+      {
+        expiresIn: "1d",
+      }
     );
 
     res.send({

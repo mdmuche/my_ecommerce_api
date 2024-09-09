@@ -25,7 +25,7 @@ describe("Testing all authentication routes", () => {
       .send({
         fullName: "admin abula",
         email: "abulamartins@gmail.com",
-        password: "test123",
+        password: "Test@123",
       })
       .expect(201);
 

@@ -25,7 +25,7 @@ describe("Testing all authentication routes", () => {
       .send({
         fullName: "admin abula",
         email: "abulamartins@gmail.com",
-        password: "test123",
+        password: "Test@123",
       })
       .expect(201);
 
@@ -33,7 +33,7 @@ describe("Testing all authentication routes", () => {
       .post("/v1/auth/login")
       .send({
         email: "abulamartins@gmail.com",
-        password: "test123",
+        password: "Test@123",
       })
       .expect(200);
 
@@ -51,7 +51,7 @@ describe("Testing all authentication routes", () => {
       .send({
         fullName: "admin abula",
         email: "abulamartins@gmail.com",
-        password: "test123",
+        password: "Test@123",
       })
       .expect(201);
 
@@ -64,7 +64,7 @@ describe("Testing all authentication routes", () => {
       .post("/v1/auth/login")
       .send({
         email: "abulamartins@gmail.com",
-        password: "test123",
+        password: "Test@123",
       })
       .expect(200);
 
