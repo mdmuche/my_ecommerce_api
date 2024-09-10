@@ -60,26 +60,45 @@ const updateProduct = async (req, res, next) => {
       const uploadResult = await uploadToCloudinary(req.file.path, "images");
 
       prodImg = uploadResult.secure_url;
+
+      const updatedProduct = await prodCollection.findByIdAndUpdate(
+        id,
+        {
+          prodName,
+          prodPrice,
+          prodSnippet,
+          prodDetails,
+          prodImg: prodImg,
+        },
+        { new: true }
+      );
+
+      logUserActivity(userId, "updated", updatedProduct._id, "Product");
+
+      res.status(200).send({
+        message: "product updated successfully!",
+        updatedProduct,
+      });
+    } else {
+      const updatedProduct = await prodCollection.findByIdAndUpdate(
+        id,
+        {
+          prodName,
+          prodPrice,
+          prodSnippet,
+          prodDetails,
+          prodImg: undefined,
+        },
+        { new: true }
+      );
+
+      logUserActivity(userId, "updated", updatedProduct._id, "Product");
+
+      res.status(200).send({
+        message: "product updated successfully!",
+        updatedProduct,
+      });
     }
-
-    const updatedProduct = await prodCollection.findByIdAndUpdate(
-      id,
-      {
-        prodName,
-        prodPrice,
-        prodSnippet,
-        prodDetails,
-        prodImg: prodImg,
-      },
-      { new: true }
-    );
-
-    logUserActivity(userId, "updated", updatedProduct._id, "Product");
-
-    res.status(200).send({
-      message: "product updated successfully!",
-      updatedProduct,
-    });
   } catch (err) {
     console.error("server error", err.message);
     return res
