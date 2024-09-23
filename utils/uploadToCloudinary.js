@@ -11,7 +11,7 @@ async function uploadToCloudinary(fileOrFiles, fileType = "image") {
 
     if (typeof fileOrFiles === "string") {
       const fileProps = await cloudinary.v2.uploader.upload(fileOrFiles, {
-        folder: uploadPreset,
+        folder: process.env.UPLOAD_PRESET,
       });
       return fileProps;
     } else if (Array.isArray(fileOrFiles)) {
@@ -19,7 +19,7 @@ async function uploadToCloudinary(fileOrFiles, fileType = "image") {
       for (let i = 0; i < fileOrFiles.length; i++) {
         filesProps.push(
           await cloudinary.v2.uploader.upload(fileOrFiles[i], {
-            folder: uploadPreset,
+            folder: process.env.UPLOAD_PRESET,
           })
         );
       }

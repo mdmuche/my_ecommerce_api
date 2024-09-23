@@ -3,7 +3,7 @@ const cloudinary = require("./cloudinary");
 async function deleteFromCloudinary(publicId, resourceType = "image") {
   try {
     const result = await cloudinary.v2.uploader.destroy(
-      "trovi_images_test/" + publicId,
+      process.env.UPLOAD_PRESET + "/" + publicId,
       { resource_type: resourceType }
     );
     return result.result;
