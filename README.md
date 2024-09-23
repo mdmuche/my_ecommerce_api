@@ -257,7 +257,6 @@ Authorization: Bearer your_jwt_token
 Admin Tests
 `npm test`
 
-API Documentation
 [Api documentation](https://www.postman.com/calinario/workspace/ecom-projects/collection/28907920-5fa57c13-9ee1-487c-b926-b9f6e1dd979b?action=share&creator=28907920)
 
 ```
